@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Orders";
+}
+
+@model adAgency.Models.Orders
+
+<img src="~/images/images.jpg" />
+<h1>Заказы</h1>
+<table>
+        <tr>
+            <th>Дата заключения договора</th>
+            <th>Срок действия</th>
+            <th>Место расположения</th>
+            <th>Цена услуги</th>
+        </tr>
+        @{
+            List<Orders> orders = (List<Orders>)ViewData["orders"];
+            foreach (var item in orders)
+            {
+                <tr>
+                    <td>@item.DateOrder</td>
+                    <td>@item.DateBegin - @item.DateEnd</td>
+                    <td>@item.Location</td>
+                    <td>@item.OrderCost</td>
+                </tr>
+            }
+        }
+</table>
+
+@using (Html.BeginForm("AddOrder", "Home", FormMethod.Post))
+{
+    <p class="add"> Добавить </p>
+    <p>
+        <label>Дата заключения договора</label>
+        <input type="date" name="DateOrder" />
+    </p>
+    <p>
+        <label>Начало</label>
+        <input type="date" name="DateBegin" />
+    </p>
+    <p>
+        <label>Конец</label>
+        <input type="date" name="DateEnd" />
+    </p>
+    <p>
+        <label>Место расположения</label>
+        @Html.EditorFor(order => order.Location)
+    </p>
+    <p>
+        <label>Цена услуги</label>
+        @Html.EditorFor(order => order.OrderCost)
+    </p>
+    <p>
+        <input type="submit" value="Send">
+    </p>
+}

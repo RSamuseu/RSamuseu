@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Customers";
+}
+
+@model adAgency.Models.Customers
+
+<img src="~/images/images.jpg" />
+<h1>Заказчики</h1>
+<table>
+    <tr>
+        <th>Заказчик</th>
+        <th>Адрес</th>
+        <th>Телефон</th>
+    </tr>
+    @{
+        List<Customers> customers = (List<Customers>)ViewData["customers"];
+        foreach (var item in customers)
+        {
+            <tr>
+                <td>@item.CustomerName</td>
+                <td>@item.CustomerAddress</td>
+                <td>@item.CustomerTelephone</td>
+            </tr>
+        }
+    }
+</table>
+
+@using (Html.BeginForm("AddCustomer", "Home", FormMethod.Post))
+{
+    <p class="add"> Добавить </p>
+    <p>
+        <label>Имя заказчика</label>
+        @Html.EditorFor(customer => customer.CustomerName)
+    </p>
+    <p>
+        <label>Адрес</label>
+        @Html.EditorFor(customer => customer.CustomerAddress)
+    </p>
+    <p>
+        <label>Телефон</label>
+        @Html.EditorFor(customer => customer.CustomerTelephone)
+    </p>
+    <p>
+        <input type="submit" value="Send">
+    </p>
+}

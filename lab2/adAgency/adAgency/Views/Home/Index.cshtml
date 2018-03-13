@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Advedirsments";
+}
+
+@model adAgency.Models.Advedirsments
+
+<img src="~/images/images.jpg" />
+<p></p>
+<h1>Виды рекламы</h1>
+<table>
+        <tr>
+            <th>Тип</th>
+            <th>Описание</th>
+        </tr>
+        @{
+            List<Advedirsments> advedirsments = (List<Advedirsments>)ViewData["advedirsments"];
+            foreach (var item in advedirsments)
+            {
+                <tr>
+                    <td>@item.AdType</td>
+                    <td>@item.AdDescription</td>
+                </tr>
+            }
+        }
+</table>
+
+@using (Html.BeginForm("AddType", "Home", FormMethod.Post))
+{
+    <p class="add"> Добавить </p>
+    <p>
+        <label>Тип</label>
+        @Html.EditorFor(ad => ad.AdType)
+    </p>
+    <p>
+        <label>Описание</label>
+        @Html.EditorFor(ad => ad.AdDescription)
+    </p>
+    <p>
+        <input type="submit" value="Send">
+    </p>
+}

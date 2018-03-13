@@ -1,0 +1,11 @@
+E:\Флешка\Лаба\Other\Help\ИГИ\lab2\adAgency\adAgency\bin\Debug\netcoreapp2.0\adAgency.deps.json
+E:\Флешка\Лаба\Other\Help\ИГИ\lab2\adAgency\adAgency\bin\Debug\netcoreapp2.0\adAgency.runtimeconfig.json
+E:\Флешка\Лаба\Other\Help\ИГИ\lab2\adAgency\adAgency\bin\Debug\netcoreapp2.0\adAgency.runtimeconfig.dev.json
+E:\Флешка\Лаба\Other\Help\ИГИ\lab2\adAgency\adAgency\bin\Debug\netcoreapp2.0\adAgency.dll
+E:\Флешка\Лаба\Other\Help\ИГИ\lab2\adAgency\adAgency\bin\Debug\netcoreapp2.0\adAgency.pdb
+E:\Флешка\Лаба\Other\Help\ИГИ\lab2\adAgency\adAgency\obj\Debug\netcoreapp2.0\adAgency.csprojResolveAssemblyReference.cache
+E:\Флешка\Лаба\Other\Help\ИГИ\lab2\adAgency\adAgency\obj\Debug\netcoreapp2.0\adAgency.csproj.CoreCompileInputs.cache
+E:\Флешка\Лаба\Other\Help\ИГИ\lab2\adAgency\adAgency\obj\Debug\netcoreapp2.0\adAgency.AssemblyInfoInputs.cache
+E:\Флешка\Лаба\Other\Help\ИГИ\lab2\adAgency\adAgency\obj\Debug\netcoreapp2.0\adAgency.AssemblyInfo.cs
+E:\Флешка\Лаба\Other\Help\ИГИ\lab2\adAgency\adAgency\obj\Debug\netcoreapp2.0\adAgency.dll
+E:\Флешка\Лаба\Other\Help\ИГИ\lab2\adAgency\adAgency\obj\Debug\netcoreapp2.0\adAgency.pdb

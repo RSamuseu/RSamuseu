@@ -1,0 +1,93 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    height: 100%;
+    background-image: url(../images/back.jpg);
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+#qrCode {
+    margin: 15px;
+}
+
+td, th {
+    width: 200px;
+    height:50px;
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    text-align: center;
+}
+
+table {
+    margin-top: 20px;
+}
+
+form {
+    width: 350px;
+    position: absolute;
+    right: 70px;
+    top: 70px;
+}
+
+.add{
+     font-weight: bold;
+     text-align: center;
+     font-size: 20px;
+}
+
+label {
+    display: inline-block;
+    width: 130px;
+}
+
+input{
+    width: 200px;
+    background-color: transparent;
+    border: 1px solid black;
+}
+
+img{
+    margin-top: 5px;
+    height: 80px;
+}
+
+input[type="submit"]{
+    width: 50px;
+    position: absolute;
+    right: 20px;
+    background-color: darkgrey;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.employees{
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
