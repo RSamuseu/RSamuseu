@@ -1,0 +1,88 @@
+﻿@model advertisingAgency.Models.Customers
+@{
+    ViewData["Title"] = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<img src="~/images/images.jpg" />
+<h1>Заказчики</h1>
+<table>
+    <tr>
+        <th>Заказчик</th>
+        <th>Адрес</th>
+        <th>Телефон</th>
+    </tr>
+        @foreach (Customers item in ViewBag.customers)
+        {
+        <tr>
+            <td>@item.CustomerName</td>
+            <td>@item.CustomerAddress</td>
+            <td>@item.CustomerTelephone</td>
+        </tr>
+         }
+</table>
+
+@{
+    advertisingAgency.Models.Customers customersSession =
+        (advertisingAgency.Models.Customers)ViewBag.customersSession;
+}
+
+@using (Html.BeginForm("AddCustomer", "Home", FormMethod.Post))
+{
+    <p class="add"> Добавить </p>
+    <p>
+        <label>Имя заказчика</label>
+        @{
+            if (customersSession != null)
+            {
+                @Html.TextBox("CustomerName", customersSession.CustomerName)
+            }
+            else
+            {
+                @Html.TextBox("CustomerName")
+            }
+        }
+    </p>
+    <p>
+        <label>Адрес</label>
+        @{
+            if (customersSession != null)
+            {
+                @Html.TextBox("CustomerAddress", customersSession.CustomerAddress)
+            }
+            else
+            {
+                @Html.TextBox("CustomerAddress")
+            }
+        }
+    </p>
+    <p>
+        <label>Телефон</label>
+        @{
+            if (customersSession != null)
+            {
+                @Html.TextBox("CustomerTelephone", customersSession.CustomerTelephone)
+            }
+            else
+            {
+                @Html.TextBox("CustomerTelephone")
+            }
+        }
+    </p>
+    <p>
+        <input type="submit" value="Send">
+    </p>
+}
+
+@{
+    if (@ViewData["customersFromMemoryCashe"] != null)
+    {
+        advertisingAgency.Models.Customers custFromMemoryCashe = (advertisingAgency.Models.Customers)ViewData["customersFromMemoryCashe"];
+    <div class="infoMemory">
+        <p>MemoryCache</p>
+        @Html.DisplayNameFor(x => x.CustomerName):&nbsp @custFromMemoryCashe.CustomerName.ToString();<br />
+        @Html.DisplayNameFor(x => x.CustomerAddress):&nbsp @custFromMemoryCashe.CustomerAddress.ToString();<br />
+        @Html.DisplayNameFor(x => x.CustomerTelephone):&nbsp @custFromMemoryCashe.CustomerTelephone.ToString();<br />
+    </div>
+    }
+}

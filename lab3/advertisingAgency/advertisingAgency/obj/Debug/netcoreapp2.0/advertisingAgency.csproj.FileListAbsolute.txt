@@ -1,0 +1,22 @@
+E:\Флешка\Лаба\Other\Help\ИГИ\lab3\advertisingAgency\advertisingAgency\bin\Debug\netcoreapp2.0\advertisingAgency.deps.json
+E:\Флешка\Лаба\Other\Help\ИГИ\lab3\advertisingAgency\advertisingAgency\bin\Debug\netcoreapp2.0\advertisingAgency.runtimeconfig.json
+E:\Флешка\Лаба\Other\Help\ИГИ\lab3\advertisingAgency\advertisingAgency\bin\Debug\netcoreapp2.0\advertisingAgency.runtimeconfig.dev.json
+E:\Флешка\Лаба\Other\Help\ИГИ\lab3\advertisingAgency\advertisingAgency\bin\Debug\netcoreapp2.0\advertisingAgency.dll
+E:\Флешка\Лаба\Other\Help\ИГИ\lab3\advertisingAgency\advertisingAgency\bin\Debug\netcoreapp2.0\advertisingAgency.pdb
+E:\Флешка\Лаба\Other\Help\ИГИ\lab3\advertisingAgency\advertisingAgency\obj\Debug\netcoreapp2.0\advertisingAgency.csprojResolveAssemblyReference.cache
+E:\Флешка\Лаба\Other\Help\ИГИ\lab3\advertisingAgency\advertisingAgency\obj\Debug\netcoreapp2.0\advertisingAgency.csproj.CoreCompileInputs.cache
+E:\Флешка\Лаба\Other\Help\ИГИ\lab3\advertisingAgency\advertisingAgency\obj\Debug\netcoreapp2.0\advertisingAgency.AssemblyInfoInputs.cache
+E:\Флешка\Лаба\Other\Help\ИГИ\lab3\advertisingAgency\advertisingAgency\obj\Debug\netcoreapp2.0\advertisingAgency.AssemblyInfo.cs
+E:\Флешка\Лаба\Other\Help\ИГИ\lab3\advertisingAgency\advertisingAgency\obj\Debug\netcoreapp2.0\advertisingAgency.dll
+E:\Флешка\Лаба\Other\Help\ИГИ\lab3\advertisingAgency\advertisingAgency\obj\Debug\netcoreapp2.0\advertisingAgency.pdb
+C:\Users\Роман Самусев\Desktop\lab3\advertisingAgency\advertisingAgency\bin\Debug\netcoreapp2.0\advertisingAgency.deps.json
+C:\Users\Роман Самусев\Desktop\lab3\advertisingAgency\advertisingAgency\bin\Debug\netcoreapp2.0\advertisingAgency.runtimeconfig.json
+C:\Users\Роман Самусев\Desktop\lab3\advertisingAgency\advertisingAgency\bin\Debug\netcoreapp2.0\advertisingAgency.runtimeconfig.dev.json
+C:\Users\Роман Самусев\Desktop\lab3\advertisingAgency\advertisingAgency\bin\Debug\netcoreapp2.0\advertisingAgency.dll
+C:\Users\Роман Самусев\Desktop\lab3\advertisingAgency\advertisingAgency\bin\Debug\netcoreapp2.0\advertisingAgency.pdb
+C:\Users\Роман Самусев\Desktop\lab3\advertisingAgency\advertisingAgency\obj\Debug\netcoreapp2.0\advertisingAgency.csprojResolveAssemblyReference.cache
+C:\Users\Роман Самусев\Desktop\lab3\advertisingAgency\advertisingAgency\obj\Debug\netcoreapp2.0\advertisingAgency.csproj.CoreCompileInputs.cache
+C:\Users\Роман Самусев\Desktop\lab3\advertisingAgency\advertisingAgency\obj\Debug\netcoreapp2.0\advertisingAgency.AssemblyInfoInputs.cache
+C:\Users\Роман Самусев\Desktop\lab3\advertisingAgency\advertisingAgency\obj\Debug\netcoreapp2.0\advertisingAgency.AssemblyInfo.cs
+C:\Users\Роман Самусев\Desktop\lab3\advertisingAgency\advertisingAgency\obj\Debug\netcoreapp2.0\advertisingAgency.dll
+C:\Users\Роман Самусев\Desktop\lab3\advertisingAgency\advertisingAgency\obj\Debug\netcoreapp2.0\advertisingAgency.pdb

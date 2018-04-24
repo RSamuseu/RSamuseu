@@ -1,0 +1,67 @@
+﻿@model advertisingAgency.Models.Orders
+@{
+    ViewData["Title"] = "Orders";
+
+}
+<img src="~/images/images.jpg" />
+<h1>Заказы</h1>
+<table>
+    <tr>
+        <th>Дата заключения договора</th>
+        <th>Срок действия</th>
+        <th>Место расположения</th>
+        <th>Цена услуги</th>
+    </tr>
+    @foreach (Orders item in ViewBag.orders)
+    {
+        <tr>
+            <td>@item.DateOrder.ToShortDateString()</td>
+            <td>@item.DateBegin.ToShortDateString() - @item.DateEnd.ToShortDateString()</td>
+            <td>@item.Location</td>
+            <td>@item.OrderCost</td>
+        </tr>
+    }
+</table>
+
+@using (Html.BeginForm("AddOrder", "Home", FormMethod.Post))
+{
+    <p class="add"> Добавить </p>
+    <p>
+        <label>Дата заключения договора</label>
+        <input type="date" name="DateOrder" />
+    </p>
+    <p>
+        <label>Начало</label>
+        <input type="date" name="DateBegin" />
+    </p>
+    <p>
+        <label>Конец</label>
+        <input type="date" name="DateEnd" />
+    </p>
+    <p>
+        <label>Место расположения</label>
+        @Html.EditorFor(order => order.Location)
+    </p>
+    <p>
+        <label>Цена услуги</label>
+        @Html.EditorFor(order => order.OrderCost)
+    </p>
+    <p>
+        <input type="submit" value="Send">
+    </p>
+}
+
+@{
+    if (ViewBag.ordFromMemory != null)
+    {
+        advertisingAgency.Models.Orders ordersFromMemoryCashe = (advertisingAgency.Models.Orders)ViewBag.ordFromMemory;
+    <div class="infoMemory">
+        <p>MemoryCache</p>
+        @Html.DisplayNameFor(x => x.DateOrder):&nbsp @ordersFromMemoryCashe.DateOrder.ToShortDateString();<br />
+        @Html.DisplayNameFor(x => x.DateBegin):&nbsp @ordersFromMemoryCashe.DateBegin.ToShortDateString();<br />
+        @Html.DisplayNameFor(x => x.DateBegin):&nbsp @ordersFromMemoryCashe.DateEnd.ToShortDateString();<br />
+        @Html.DisplayNameFor(x => x.Location):&nbsp @ordersFromMemoryCashe.Location.ToString();<br />
+        @Html.DisplayNameFor(x => x.OrderCost):&nbsp @ordersFromMemoryCashe.OrderCost.ToString();<br />
+    </div>
+    }
+}

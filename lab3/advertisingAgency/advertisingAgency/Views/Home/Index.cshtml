@@ -1,0 +1,75 @@
+﻿@model advertisingAgency.Models.Advedirsments
+@{
+    ViewData["Title"] = "Advedirsments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<img src="~/images/images.jpg" />
+<p></p>
+<h1>Виды рекламы</h1>
+<table border="1">
+    <tr>
+        <th>Тип</th>
+        <th>Описание</th>
+    </tr>
+    @foreach (var item in ViewBag.advedirsments)
+    {
+        <tr>
+            <td>@item.AdType</td>
+            <td>@item.AdDescription</td>
+        </tr>
+    }
+</table>
+
+@{
+    advertisingAgency.Models.Advedirsments adCoockies = (advertisingAgency.Models.Advedirsments)ViewBag.adCoockies;
+}
+
+@using (Html.BeginForm("AddType", "Home", FormMethod.Post))
+{
+    <p class="add"> Добавить </p>
+    <p>
+        <label>Тип</label>
+        @{
+            if (adCoockies != null)
+            {
+                @Html.TextBox("AdType", adCoockies.AdType);
+
+            }
+            else
+            {
+                @Html.TextBox("AdType");
+
+            }
+        }
+
+    </p>
+    <p>
+        <label>Описание</label>
+        @{
+            if (adCoockies != null)
+            {
+                @Html.TextBox("AdDescription", adCoockies.AdDescription);
+            }
+            else
+            {
+                @Html.TextBox("AdDescription");
+            }
+        }
+
+    </p>
+    <p>
+        <input type="submit" value="Send">
+    </p>
+}
+@{
+    if (ViewBag.adFromMemory != null)
+    {
+        advertisingAgency.Models.Advedirsments adFromMemoryCashe = (advertisingAgency.Models.Advedirsments)ViewBag.adFromMemory;
+    <div class="infoMemory">
+        <p>MemoryCache</p>
+        @Html.DisplayNameFor(x => x.AdType):&nbsp @adFromMemoryCashe.AdType.ToString();<br />
+        @Html.DisplayNameFor(x => x.AdDescription):&nbsp @adFromMemoryCashe.AdDescription.ToString();<br />
+    </div>
+    }
+}
