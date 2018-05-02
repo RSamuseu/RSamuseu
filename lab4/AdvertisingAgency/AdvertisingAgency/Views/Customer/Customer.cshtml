@@ -1,0 +1,110 @@
+﻿@model AdvertisingAgency.Models.Customers
+@{
+    ViewData["Title"] = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<img src="~/images/images.jpg" />
+<h1>Заказчики</h1>
+
+@using (Html.BeginForm("Customer", "Customer", FormMethod.Get))
+{
+    <p>
+        <label>Имя заказчика</label>
+        @Html.TextBox("CustomerName")
+        <input type="submit" value="Filter" />
+    </p>
+}
+
+<table>
+    <tr>
+        <th>
+            <a asp-action="Customer" asp-route-sortCustomer="@ViewBag.CustomerNameSort">
+                Имя
+            </a>
+        </th>
+        <th>
+            <a asp-action="Customer" asp-route-sortCustomer="@ViewBag.CustomerAddressSort">
+                Адрес
+            </a>
+        </th>
+        <th>
+            <a asp-action="Customer" asp-route-sortCustomer="@ViewBag.CustomerTelephoneSort">
+                Телефон
+            </a>
+        </th>
+    </tr>
+    @foreach (var item in ViewBag.customers)
+    {
+        <tr>
+            <td>@item.CustomerName</td>
+            <td>@item.CustomerAddress</td>
+            <td>@item.CustomerTelephone</td>
+        </tr>
+    }
+</table>
+
+@{
+    AdvertisingAgency.Models.Customers customerSession =
+        (AdvertisingAgency.Models.Customers)ViewBag.customerSession;
+}
+
+@using (Html.BeginForm("AddCustomer", "Customer", FormMethod.Post))
+{
+    <p class="add"> Добавить </p>
+    <p>
+        <label>Имя заказчика</label>
+        @{
+            if (customerSession != null)
+            {
+                @Html.TextBox("CustomerName", customerSession.CustomerName)
+            }
+            else
+            {
+                @Html.TextBox("CustomerName")
+            }
+        }
+    </p>
+    <p>
+        <label>Адрес</label>
+        @{
+            if (customerSession != null)
+            {
+                @Html.TextBox("CustomerAddress", customerSession.CustomerAddress)
+            }
+            else
+            {
+                @Html.TextBox("CustomerAddress")
+            }
+        }
+    </p>
+    <p>
+        <label>Телефон</label>
+        @{
+            if (customerSession != null)
+            {
+                @Html.TextBox("CustomerTelephone", customerSession.CustomerTelephone)
+            }
+            else
+            {
+                @Html.TextBox("CustomerTelephone")
+            }
+        }
+    </p>
+    <p>
+        <input type="submit" value="Send">
+    </p>
+}
+
+@{
+    if (@ViewData["customersFromMemoryCashe"] != null)
+    {
+        AdvertisingAgency.Models.Customers custFromMemoryCashe = (AdvertisingAgency.Models.Customers)ViewData["customersFromMemoryCashe"];
+        <div class="infoMemory">
+            <p>MemoryCache</p>
+            @Html.DisplayNameFor(x => x.CustomerName):&nbsp @custFromMemoryCashe.CustomerName.ToString();<br />
+            @Html.DisplayNameFor(x => x.CustomerAddress):&nbsp @custFromMemoryCashe.CustomerAddress.ToString();<br />
+            @Html.DisplayNameFor(x => x.CustomerTelephone):&nbsp @custFromMemoryCashe.CustomerTelephone.ToString();<br />
+        </div>
+    }
+}
