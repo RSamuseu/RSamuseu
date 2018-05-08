@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Advertising Agency</title>
+    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="lib/jquery/dist/jquery.js"></script>
+</head>
+<body>
+    <h2>Заказы:</h2>
+    <form name="orderForm">
+        <input type="hidden" name="ordersId" value="0" />
+        <div class="form-group">
+            <label for="dateOrder">Дата заказа:</label>
+            <input class="form-control" name="dateOrder" />
+        </div>
+        <div class="form-group">
+            <label for="location">Месторасположение:</label>
+            <input class="form-control" name="location" />
+        </div>
+        <div class="form-group">
+            <label for="orderCost">Стоимость:</label>
+            <input class="form-control" name="orderCost" />
+        </div>
+        <div class="panel-body">
+            <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
+            <a id="reset" class="btn btn-sm btn-primary">Сбросить</a>
+        </div>
+    </form>
+    <table class="table table-condensed table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Дата заказа</th>
+                <th>Месторасположения</th>
+                <th>Цена услуги</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+            // Получение списка всех заказов
+            function Getorders() {
+                $.ajax({
+                    url: '/api/Home',
+                    type: 'GET',
+                    contentType: "application/json",
+                    success: function (orders) {
+                        var rows = "";
+                        $.each(orders, function (index, order) {
+                            // добавляем полученные элементы в таблицу
+                            rows += row(order);
+                        })
+                        $("table tbody").append(rows);
+                    }
+                });
+            }
+
+            // Получение одного заказа
+            function Getorder(id) {
+                $.ajax({
+                    url: '/api/Home/' + id,
+                    type: 'GET',
+                    contentType: "application/json",
+                    success: function (order) {
+                        var form = document.forms["orderForm"];
+                        form.elements["ordersId"].value = order.ordersId;
+                        form.elements["dateOrder"].value = order.dateOrder;
+                        form.elements["location"].value = order.location;
+                        form.elements["orderCost"].value = order.orderCost;
+                    }
+                });
+            }
+
+            // Добавление заказа
+            function CreateOrder(dateOrder, location, orderCost) {
+                $.ajax({
+                    url: "api/Home",
+                    contentType: "application/json",
+                    method: "POST",
+                    data: JSON.stringify({
+                        dateOrder: dateOrder,
+                        location: location,
+                        orderCost: orderCost
+                    }),
+                    success: function (order) {
+                        reset();
+                    
+                        reset();
+                        $("table tbody").append(generateRow(order));
+                    }
+                })
+            }
+
+            // Изменение заказа
+            function Editorder(ordersId, dateOrder, location, orderCost) {
+                $.ajax({
+                    url: "api/Home",
+                    contentType: "application/json",
+                    method: "PUT",
+                    data: JSON.stringify({
+                        ordersId: ordersId,
+                        dateOrder: dateOrder,
+                        location: location,
+                        orderCost: orderCost
+                    }),
+                    success: function (order) {
+                        reset();
+                        $("tr[data-rowid='" + order.ordersId + "']").replaceWith(row(order));
+                    }
+                })
+            }
+
+            // сброс формы
+            function reset() {
+                var form = document.forms["orderForm"];
+                form.reset();
+                form.elements["ordersId"].value = 0;
+            }
+
+            // Удаление заказа
+            function Deleteorder(id) {
+                $.ajax({
+                    url: "api/Home/" + id,
+                    contentType: "application/json",
+                    method: "DELETE",
+                    success: function (order) {
+                        $("tr[data-rowid='" + order.ordersId + "']").remove();
+                    }
+                })
+            }
+
+            // создание строки для таблицы
+            var row = function (order) {
+                return "<tr data-rowid='" + order.ordersId + "'><td>" + order.ordersId + "</td>" +
+                    "<td>" + order.dateOrder + "</td>" +
+                    "<td>" + order.location + "</td>" +
+                    "<td>" + order.orderCost + "</td>" +
+                    "<td><a class='editLink' data-id='" + order.ordersId + "'>Изменить</a> | " +
+                    "<a class='removeLink' data-id='" + order.ordersId + "'>Удалить</a></td></tr>";
+            }
+
+            // сброс значений формы
+            $("#reset").click(function (e) {
+                e.preventDefault();
+                reset();
+            })
+
+            // отправка формы
+            $("form").submit(function (e) {
+
+                e.preventDefault();
+                var ordersId = this.elements["ordersId"].value;
+                var dateOrder = this.elements["dateOrder"].value;
+                var location = this.elements["location"].value;
+                var orderCost = this.elements["orderCost"].value;
+                if (ordersId == 0)
+                    CreateOrder(dateOrder, location, orderCost);
+                else
+                    Editorder(ordersId, dateOrder, location, orderCost);
+            });
+
+            // нажатие на ссылку Изменить
+            $("body").on("click", ".editLink", function () {
+                var id = $(this).data("id");
+                Getorder(id);
+            })
+            // нажатие на ссылку Удалить
+            $("body").on("click", ".removeLink", function () {
+                var id = $(this).data("id");
+                Deleteorder(id);
+            })
+            // загрузка данных для таблицы и ее формирование
+            Getorders();
+    </script>
+</body>
+</html>
