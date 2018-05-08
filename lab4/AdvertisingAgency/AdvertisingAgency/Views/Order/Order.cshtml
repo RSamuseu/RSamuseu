@@ -1,0 +1,93 @@
+﻿@model AdvertisingAgency.Models.Orders
+@{
+    ViewData["Title"] = "Orders";
+
+}
+<img src="~/images/images.jpg" />
+<h1>Заказы</h1>
+
+@using (Html.BeginForm("Order", "Order", FormMethod.Get))
+{
+    <p>
+        <label>Дата Договора</label>
+        @Html.TextBox("DateOrder")
+        <input type="submit" value="Filter" />
+    </p>
+}
+
+<table>
+    <tr>
+        <th>
+            <a asp-action="Order" asp-route-sortOrder="@ViewBag.DateOrderSort">
+                Дата заключения договора
+            </a>
+        </th>
+        <th>
+            <a asp-action="Order" asp-route-sortOrder="@ViewBag.OrderPeriodSort">
+                Срок действия
+            </a>
+        </th>
+        <th>
+            <a asp-action="Order" asp-route-sortOrder="@ViewBag.OrderLocationSort">
+                Место расположения
+            </a>
+        </th>
+        <th>
+            <a asp-action="Order" asp-route-sortOrder="@ViewBag.OrderCostSort">
+                Цена услуги
+            </a>
+        </th>
+    </tr>
+    @foreach (var item in ViewBag.orders)
+    {
+        <tr>
+            <td>@item.DateOrder.ToShortDateString()</td>
+            <td>@item.DateBegin.ToShortDateString() - @item.DateEnd.ToShortDateString()</td>
+            <td>@item.Location</td>
+            <td>@item.OrderCost</td>
+        </tr>
+    }
+</table>
+
+@using (Html.BeginForm("AddOrder", "Order", FormMethod.Post))
+{
+    <p class="add"> Добавить </p>
+    <p>
+        <label>Дата заключения договора</label>
+        <input type="date" name="DateOrder" />
+    </p>
+    <p>
+        <label>Начало</label>
+        <input type="date" name="DateBegin" />
+    </p>
+    <p>
+        <label>Конец</label>
+        <input type="date" name="DateEnd" />
+    </p>
+    <p>
+        <label>Место расположения</label>
+        @Html.EditorFor(order => order.Location)
+    </p>
+    <p>
+        <label>Цена услуги</label>
+        @Html.EditorFor(order => order.OrderCost)
+    </p>
+    <p>
+        <input type="submit" value="Send">
+    </p>
+}
+
+@{
+    if (ViewBag.ordFromMemory != null)
+    {
+        AdvertisingAgency.Models.Orders ordersFromMemoryCashe = (AdvertisingAgency.Models.Orders)ViewBag.ordFromMemory;
+        <div class="infoMemory">
+            <p>MemoryCache</p>
+            @Html.DisplayNameFor(x => x.DateOrder):&nbsp @ordersFromMemoryCashe.DateOrder.ToShortDateString();<br />
+            @Html.DisplayNameFor(x => x.DateBegin):&nbsp @ordersFromMemoryCashe.DateBegin.ToShortDateString();<br />
+            @Html.DisplayNameFor(x => x.DateBegin):&nbsp @ordersFromMemoryCashe.DateEnd.ToShortDateString();<br />
+            @Html.DisplayNameFor(x => x.Location):&nbsp @ordersFromMemoryCashe.Location.ToString();<br />
+            @Html.DisplayNameFor(x => x.OrderCost):&nbsp @ordersFromMemoryCashe.OrderCost.ToString();<br />
+        </div>
+    }
+}

@@ -1,0 +1,91 @@
+﻿@model AdvertisingAgency.Models.Advedirsments
+@{
+    ViewData["Title"] = "Advedirsments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<img src="~/images/images.jpg" />
+<p></p>
+<h1>Виды рекламы</h1>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <p>
+        <label>Тип Рекламы</label>
+        @Html.TextBox("AdType")
+        <input type="submit" value="Filter" />
+    </p>
+}
+
+<table border="1">
+    <tr>
+        <th>
+            <a asp-action="Index" asp-route-sortType="@ViewBag.AdTypeSort">
+                Тип
+            </a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortType="@ViewBag.DesriptionSort">
+                Описание
+            </a>
+        </th>
+    </tr>
+    @foreach (var item in ViewBag.advedirsments)
+    {
+        <tr>
+            <td>@item.AdType</td>
+            <td>@item.AdDescription</td>
+        </tr>
+    }
+</table>
+
+@using (Html.BeginForm("AddType", "Home", FormMethod.Post))
+{
+    <p class="add"> Добавить </p>
+    <p>
+        <label>Тип</label>
+        @{
+            Advedirsments adSession = (Advedirsments)ViewBag.adSesion;
+            if (adSession != null)
+            {
+                @Html.TextBox("AdType", adSession.AdType);
+
+            }
+            else
+            {
+                @Html.TextBox("AdType");
+
+            }
+        }
+
+    </p>
+    <p>
+        <label>Описание</label>
+        @{
+            if (adSession != null)
+            {
+                @Html.TextBox("AdDescription", adSession.AdDescription);
+            }
+            else
+            {
+                @Html.TextBox("AdDescription");
+            }
+        }
+
+    </p>
+    <p>
+        <input type="submit" value="Send">
+    </p>
+}
+
+@{
+    if (ViewBag.adFromMemory != null)
+    {
+        AdvertisingAgency.Models.Advedirsments adFromMemoryCashe = (AdvertisingAgency.Models.Advedirsments)ViewBag.adFromMemory;
+        <div class="infoMemory">
+            <p>MemoryCache</p>
+            @Html.DisplayNameFor(x => x.AdType):&nbsp @adFromMemoryCashe.AdType.ToString();<br />
+            @Html.DisplayNameFor(x => x.AdDescription):&nbsp @adFromMemoryCashe.AdDescription.ToString();<br />
+        </div>
+    }
+}
