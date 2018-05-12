@@ -29,8 +29,14 @@ namespace AdAgencyWebAPI.Controllers
              {
                  OrdersId = o.OrdersId,
                  DateOrder = o.DateOrder,
+                 DateBegin = o.DateBegin,
+                 DateEnd = o.DateEnd,
                  Location = o.Location,
                  OrderCost = o.OrderCost,
+                 AdvedirsmentsId = o.AdvedirsmentsId,
+                 AdType = o.Advedirsments.AdType,
+                 CustomersId = o.CustomersId,
+                 CustomerName = o.Customers.CustomerName
              });
             return item.OrderBy(o => o.OrdersId).ToList();
         }
@@ -43,6 +49,22 @@ namespace AdAgencyWebAPI.Controllers
             if (item == null)
                 return NotFound();
             return new ObjectResult(item);
+        }
+
+        // GET api/values
+        [HttpGet("advedirsments")]
+        [Produces("application/json")]
+        public IEnumerable<Advedirsments> GetAdvedirsments()
+        {
+            return _context.Advedirsments.ToList();
+        }
+
+        // GET api/values
+        [HttpGet("customers")]
+        [Produces("application/json")]
+        public IEnumerable<Customers> GetCustomers()
+        {
+            return _context.Customers.ToList();
         }
 
         // POST api/values

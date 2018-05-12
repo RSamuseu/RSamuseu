@@ -12,8 +12,24 @@
     <form name="orderForm">
         <input type="hidden" name="ordersId" value="0" />
         <div class="form-group">
+            <label for="adType">Вид рекламы:</label>
+            <select id="advedirsmentsId" name="advedirsmentsId"></select>
+        </div>
+        <div class="form-group">
+            <label for="customerName">Заказчик:</label>
+            <select id="customersId" name="customersId"></select>
+        </div>
+        <div class="form-group">
             <label for="dateOrder">Дата заказа:</label>
             <input class="form-control" name="dateOrder" />
+        </div>
+        <div class="form-group">
+            <label for="dateBegin">Дата начало работы:</label>
+            <input class="form-control" name="dateBegin" />
+        </div>
+        <div class="form-group">
+            <label for="dateEnd">Дата окончания работы:</label>
+            <input class="form-control" name="dateEnd" />
         </div>
         <div class="form-group">
             <label for="location">Месторасположение:</label>
@@ -32,7 +48,11 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Вил рекламы</th>
+                <th>Заказчик</th>
                 <th>Дата заказа</th>
+                <th>Дата начала работы</th>
+                <th>Дата окончания работы</th>
                 <th>Месторасположения</th>
                 <th>Цена услуги</th>
                 <th></th>
@@ -67,7 +87,11 @@
                     success: function (order) {
                         var form = document.forms["orderForm"];
                         form.elements["ordersId"].value = order.ordersId;
+                        form.elements["advedirsmentsId"].selectedIndex = order.advedirsmentsId;
+                        form.elements["customersId"].selectedIndex = order.customersId;
                         form.elements["dateOrder"].value = order.dateOrder;
+                        form.elements["dateBegin"].value = order.dateBegin;
+                        form.elements["dateEnd"].value = order.dateEnd;
                         form.elements["location"].value = order.location;
                         form.elements["orderCost"].value = order.orderCost;
                     }
@@ -75,39 +99,51 @@
             }
 
             // Добавление заказа
-            function CreateOrder(dateOrder, location, orderCost) {
+            function CreateOrder(advedirsmentsId, customersId, dateOrder, dateBegin, dateEnd, location, orderCost) {
                 $.ajax({
                     url: "api/Home",
                     contentType: "application/json",
                     method: "POST",
                     data: JSON.stringify({
+                        advedirsmentsId: advedirsmentsId,
+                        customersId: customersId,
                         dateOrder: dateOrder,
+                        dateBegin: dateBegin,
+                        dateEnd: dateEnd,
                         location: location,
                         orderCost: orderCost
                     }),
                     success: function (order) {
                         reset();
-                    
-                        reset();
+                        var form = document.forms["orderForm"];
+                        order.adType = form.elements["advedirsmentsId"].options[advedirsmentsId].text;
+                        order.customerName = form.elements["customersId"].options[customersId].text;
                         $("table tbody").append(generateRow(order));
                     }
                 })
             }
 
             // Изменение заказа
-            function Editorder(ordersId, dateOrder, location, orderCost) {
+            function Editorder(ordersId, advedirsmentsId, customersId, dateOrder, dateBegin, dateEnd, location, orderCost) {
                 $.ajax({
                     url: "api/Home",
                     contentType: "application/json",
                     method: "PUT",
                     data: JSON.stringify({
                         ordersId: ordersId,
+                        advedirsmentsId: advedirsmentsId,
+                        customersId: customersId,
                         dateOrder: dateOrder,
+                        dateBegin: dateBegin,
+                        dateEnd: dateEnd,
                         location: location,
                         orderCost: orderCost
                     }),
                     success: function (order) {
                         reset();
+                        var form = document.forms["orderForm"];
+                        order.adType = form.elements["advedirsmentsId"].options[advedirsmentsId].text;
+                        order.customerName = form.elements["customersId"].options[customersId].text;
                         $("tr[data-rowid='" + order.ordersId + "']").replaceWith(row(order));
                     }
                 })
@@ -135,11 +171,47 @@
             // создание строки для таблицы
             var row = function (order) {
                 return "<tr data-rowid='" + order.ordersId + "'><td>" + order.ordersId + "</td>" +
+                    "<td>" + order.adType + "</td>" +
+                    "<td>" + order.customerName + "</td>" +
                     "<td>" + order.dateOrder + "</td>" +
+                    "<td>" + order.dateBegin + "</td>" +
+                    "<td>" + order.dateEnd + "</td>" +
                     "<td>" + order.location + "</td>" +
                     "<td>" + order.orderCost + "</td>" +
                     "<td><a class='editLink' data-id='" + order.ordersId + "'>Изменить</a> | " +
                     "<a class='removeLink' data-id='" + order.ordersId + "'>Удалить</a></td></tr>";
+            }
+
+            function GetAd() {
+                var listItems = "";
+                $.ajax({
+                    url: '/api/Home/advedirsments',
+                    type: 'GET',
+                    contentType: "application/json",
+                    success: function (advedirsments) {
+                        listItems = listItems + "<option value=0 selected>(Вид рекламы)</option>";
+                        $.each(advedirsments, function (index, advedirsment) {
+                            listItems = listItems + "<option value='" + advedirsment.advedirsmentsId + "'>" + advedirsment.adType + "</option>";
+                        });
+                        $("#advedirsmentsId").html(listItems);
+                    }
+                });
+            }
+
+            function GetCustomers() {
+                var listItems = "";
+                $.ajax({
+                    url: '/api/Home/customers',
+                    type: 'GET',
+                    contentType: "application/json",
+                    success: function (customers) {
+                        listItems = listItems + "<option value=0 selected>(Заказчик)</option>";
+                        $.each(customers, function (index, customer) {
+                            listItems = listItems + "<option value='" + customer.customersId + "'>" + customer.customerName + "</option>";
+                        });
+                        $("#customersId").html(listItems);
+                    }
+                });
             }
 
             // сброс значений формы
@@ -153,13 +225,17 @@
 
                 e.preventDefault();
                 var ordersId = this.elements["ordersId"].value;
+                var advedirsmentsId = this.elements["advedirsmentsId"].value;
+                var customersId = this.elements["customersId"].value;
                 var dateOrder = this.elements["dateOrder"].value;
+                var dateBegin = this.elements["dateBegin"].value;
+                var dateEnd = this.elements["dateEnd"].value;
                 var location = this.elements["location"].value;
                 var orderCost = this.elements["orderCost"].value;
                 if (ordersId == 0)
-                    CreateOrder(dateOrder, location, orderCost);
+                    CreateOrder(advedirsmentsId, customersId, dateOrder, dateBegin, dateEnd, location, orderCost);
                 else
-                    Editorder(ordersId, dateOrder, location, orderCost);
+                    Editorder(ordersId, advedirsmentsId, customersId, dateOrder, dateBegin, dateEnd, location, orderCost);
             });
 
             // нажатие на ссылку Изменить
@@ -172,8 +248,11 @@
                 var id = $(this).data("id");
                 Deleteorder(id);
             })
+
             // загрузка данных для таблицы и ее формирование
             Getorders();
+            GetAd();
+            GetCustomers();
     </script>
 </body>
 </html>
