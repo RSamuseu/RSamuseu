@@ -1,0 +1,11 @@
+E:\Флешка\Лаба\Other\Help\ИГИ\lab6\AdAgencyWebAPI\AdAgencyWebAPI\bin\Debug\netcoreapp2.0\AdAgencyWebAPI.deps.json
+E:\Флешка\Лаба\Other\Help\ИГИ\lab6\AdAgencyWebAPI\AdAgencyWebAPI\bin\Debug\netcoreapp2.0\AdAgencyWebAPI.runtimeconfig.json
+E:\Флешка\Лаба\Other\Help\ИГИ\lab6\AdAgencyWebAPI\AdAgencyWebAPI\bin\Debug\netcoreapp2.0\AdAgencyWebAPI.runtimeconfig.dev.json
+E:\Флешка\Лаба\Other\Help\ИГИ\lab6\AdAgencyWebAPI\AdAgencyWebAPI\bin\Debug\netcoreapp2.0\AdAgencyWebAPI.dll
+E:\Флешка\Лаба\Other\Help\ИГИ\lab6\AdAgencyWebAPI\AdAgencyWebAPI\obj\Debug\netcoreapp2.0\AdAgencyWebAPI.csprojResolveAssemblyReference.cache
+E:\Флешка\Лаба\Other\Help\ИГИ\lab6\AdAgencyWebAPI\AdAgencyWebAPI\obj\Debug\netcoreapp2.0\AdAgencyWebAPI.csproj.CoreCompileInputs.cache
+E:\Флешка\Лаба\Other\Help\ИГИ\lab6\AdAgencyWebAPI\AdAgencyWebAPI\obj\Debug\netcoreapp2.0\AdAgencyWebAPI.AssemblyInfoInputs.cache
+E:\Флешка\Лаба\Other\Help\ИГИ\lab6\AdAgencyWebAPI\AdAgencyWebAPI\obj\Debug\netcoreapp2.0\AdAgencyWebAPI.AssemblyInfo.cs
+E:\Флешка\Лаба\Other\Help\ИГИ\lab6\AdAgencyWebAPI\AdAgencyWebAPI\bin\Debug\netcoreapp2.0\AdAgencyWebAPI.pdb
+E:\Флешка\Лаба\Other\Help\ИГИ\lab6\AdAgencyWebAPI\AdAgencyWebAPI\obj\Debug\netcoreapp2.0\AdAgencyWebAPI.dll
+E:\Флешка\Лаба\Other\Help\ИГИ\lab6\AdAgencyWebAPI\AdAgencyWebAPI\obj\Debug\netcoreapp2.0\AdAgencyWebAPI.pdb
