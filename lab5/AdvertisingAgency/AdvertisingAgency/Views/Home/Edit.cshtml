@@ -1,0 +1,26 @@
+﻿@model AdvertisingAgency.Models.Advedirsments
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Изменить</h2>
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post))
+{
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <input type="hidden" asp-for="AdvedirsmentsId" />
+    </div>
+    <div class="form-group">
+        <label asp-for="AdType" class="control-label">Вид рекламы</label>
+        <input type="text" asp-for="AdType" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="AdDescription" class="control-label">Описание</label>
+        <input type="text" asp-for="AdDescription" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Сохранить" class="btn btn-success" />
+    </div>
+}
+

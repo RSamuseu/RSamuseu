@@ -1,0 +1,30 @@
+﻿@model AdvertisingAgency.Models.Customers
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Изменить</h2>
+@using (Html.BeginForm("Edit", "Customer", FormMethod.Post))
+{
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <input type="hidden" asp-for="CustomersId" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CustomerName" class="control-label">Имя заказчика</label>
+        <input type="text" asp-for="CustomerName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CustomerAddress" class="control-label">Адрес</label>
+        <input type="text" asp-for="CustomerAddress" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CustomerTelephone" class="control-label">Телефон</label>
+        <input type="text" asp-for="CustomerTelephone" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Сохранить" class="btn btn-success" />
+    </div>
+}

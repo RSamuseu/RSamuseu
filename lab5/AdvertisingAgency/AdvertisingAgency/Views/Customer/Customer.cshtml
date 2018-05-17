@@ -1,0 +1,120 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AdvertisingAgency.ViewModels
+@using AdvertisingAgency.Helpers
+@model CustomerViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper "*, AdvertisingAgency"
+@{
+    ViewData["Title"] = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<img src="~/images/images.jpg" />
+<h1>Заказчики</h1>
+
+@using (Html.BeginForm("Customer", "Customer", FormMethod.Get))
+{
+    <p>
+        <label>Имя заказчика</label>
+        @Html.TextBox("CustomerName")
+        <filter></filter>
+    </p>
+}
+
+<table>
+    <tr>
+        <th>
+            <a asp-action="Customer" asp-route-sortCustomer="@ViewBag.CustomerNameSort">
+                Имя
+            </a>
+        </th>
+        <th>
+            <a asp-action="Customer" asp-route-sortCustomer="@ViewBag.CustomerAddressSort">
+                Адрес
+            </a>
+        </th>
+        <th>
+            <a asp-action="Customer" asp-route-sortCustomer="@ViewBag.CustomerTelephoneSort">
+                Телефон
+            </a>
+        </th>
+        <th class="act">
+            <span>Действие</span>
+        </th>
+    </tr>
+    @TableHelper.CreateCustomerTable(Html, Model.Customers)
+</table>
+
+
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Customer"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn btn-default btn">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Customer"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn btn-default btn">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}
+
+
+@{
+    AdvertisingAgency.Models.Customers customerSession =
+        (AdvertisingAgency.Models.Customers)ViewBag.customerSession;
+}
+
+@using (Html.BeginForm("AddCustomer", "Customer", FormMethod.Post))
+{
+    <p class="add"> Добавить </p>
+    <p>
+        <label>Имя заказчика</label>
+        @{
+            if (customerSession != null)
+            {
+                @Html.TextBox("CustomerName", customerSession.CustomerName)
+            }
+            else
+            {
+                @Html.TextBox("CustomerName")
+            }
+        }
+    </p>
+    <p>
+        <label>Адрес</label>
+        @{
+            if (customerSession != null)
+            {
+                @Html.TextBox("CustomerAddress", customerSession.CustomerAddress)
+            }
+            else
+            {
+                @Html.TextBox("CustomerAddress")
+            }
+        }
+    </p>
+    <p>
+        <label>Телефон</label>
+        @{
+            if (customerSession != null)
+            {
+                @Html.TextBox("CustomerTelephone", customerSession.CustomerTelephone)
+            }
+            else
+            {
+                @Html.TextBox("CustomerTelephone")
+            }
+        }
+    </p>
+    <p>
+        <input type="submit" value="Send">
+    </p>
+}

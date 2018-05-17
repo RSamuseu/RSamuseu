@@ -1,0 +1,28 @@
+﻿@model AdvertisingAgency.ViewModels.RegisterViewModel
+
+@{
+    ViewBag.Title = "Добавление пользователя";
+}
+
+<h2>Создать нового пользователя</h2>
+<form asp-action="Create" asp-controller="Users" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Login"></label>
+        <input asp-for="Login" />
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Добавить" class="btn btn-default" />
+    </div>
+</form>

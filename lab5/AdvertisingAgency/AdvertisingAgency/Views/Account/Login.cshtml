@@ -1,0 +1,21 @@
+﻿@model AdvertisingAgency.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Вход в приложение</h2>
+<form method="post" asp-controller="Account" asp-action="Login">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label asp-for="Login"></label><br />
+        <input asp-for="Login" class="form-control"/>
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label><br />
+        <input asp-for="Password"  class="form-control" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <button type="submit" class="btn btn-default">Войти</button>
+</form>

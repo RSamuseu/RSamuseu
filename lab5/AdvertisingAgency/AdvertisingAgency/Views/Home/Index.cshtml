@@ -1,0 +1,114 @@
+﻿@using AdvertisingAgency.ViewModels
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper "*, AdvertisingAgency"
+@model IndexViewModel
+@{
+    ViewData["Title"] = "Advedirsments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<img src="~/images/images.jpg" />
+<h1>Виды рекламы</h1>
+<p></p>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <p>
+        <label>Тип Рекламы</label>
+        @Html.TextBox("AdType")
+        <filter></filter>
+    </p>
+}
+
+<table border="1">
+    <tr>
+        <th>
+            <a asp-action="Index" asp-route-sortType="@ViewBag.AdTypeSort">
+                Тип
+            </a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortType="@ViewBag.DesriptionSort">
+                Описание
+            </a>
+        </th>
+        <th class="act">
+            <span>Действие</span>
+        </th>
+    </tr>
+    @foreach (var item in Model.Advedirsments)
+    {
+        <tr>
+            <td>@item.AdType</td>
+            <td>@item.AdDescription</td>
+            <td class="act">
+                <form asp-action="Delete" asp-route-id="@item.AdvedirsmentsId" method="post">
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.AdvedirsmentsId">Изменить</a>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Удалить
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn btn-default btn">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn btn-default btn">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}
+
+@using (Html.BeginForm("AddType", "Home", FormMethod.Post))
+{
+    <p class="add"> Добавить </p>
+    <p>
+        <label>Тип</label>
+        @{
+            Advedirsments adSession = (Advedirsments)ViewBag.adSesion;
+            if (adSession != null)
+            {
+                @Html.TextBox("AdType", adSession.AdType);
+
+            }
+            else
+            {
+                @Html.TextBox("AdType");
+
+            }
+        }
+
+    </p>
+    <p>
+        <label>Описание</label>
+        @{
+            if (adSession != null)
+            {
+                @Html.TextBox("AdDescription", adSession.AdDescription);
+            }
+            else
+            {
+                @Html.TextBox("AdDescription");
+            }
+        }
+
+    </p>
+    <p>
+        <input type="submit" value="Send">
+    </p>
+}

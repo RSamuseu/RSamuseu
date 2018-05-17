@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<AdvertisingAgency.Models.User> SignInManager
+@inject UserManager<AdvertisingAgency.Models.User> UserManager
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AdvertisingAgency</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Account" asp-action="Login" class="navbar-brand"> Рекламное агенство </a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Рекламы</a></li>
+                        <li><a asp-area="" asp-controller="Customer" asp-action="Customer">Заказчики</a></li>
+                        <li><a asp-area="" asp-controller="Order" asp-action="Order">Заказы</a></li>
+                        @if (await UserManager.IsInRoleAsync(await UserManager.FindByNameAsync(User.Identity.Name), "admin"))
+                        {
+                            <li><a asp-area="" asp-controller="Users" asp-action="Index">Пользователи</a></li>
+                            <li><a asp-area="" asp-controller="Roles" asp-action="Index">Роли</a></li>
+                        }
+                    </ul>
+                </div>
+                <div id="logBlock">
+                    <span class="navbar-text pull-right" style="padding-left:10px;"> @User.Identity.Name </span>
+                    <div class="btn  btn-success" style="padding-left:10px;">@Html.ActionLink("Выйти", "Logout", "Account")</div>
+                </div>
+            }
+            else
+            {
+                <div class="btn btn-success">@Html.ActionLink("Регистрация", "Register", "Account")</div>
+                <div class="btn btn-success">@Html.ActionLink("Войти", "Login", "Account")</div>
+            }
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
